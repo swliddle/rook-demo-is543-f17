@@ -29,7 +29,7 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="rank">
                                         <integer key="value" value="11"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isFaceUp" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isFaceUp" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
