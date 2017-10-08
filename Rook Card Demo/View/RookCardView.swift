@@ -50,10 +50,20 @@ class RookCardView : UIView {
     
     // MARK: - Computed properties
     
-    var cornerRadius: CGFloat { return bounds.width * 0.05 }
-    var centerFontSize: CGFloat { return bounds.width * 0.55 }
-    var squareMargin: CGFloat { return bounds.width * 0.189 }
-    var squareStrokeWidth: CGFloat { return bounds.width * 0.005 }
+    var centerFontSize       : CGFloat { return bounds.width * 0.55 }
+    var centerImageMargin    : CGFloat { return bounds.width * 0.15 }
+    var cornerImageWidth     : CGFloat { return bounds.width * 0.18 }
+    var cornerRadius         : CGFloat { return bounds.width * 0.05 }
+    var cornerRankFontSize   : CGFloat { return bounds.width * 0.2 }
+    var cornerSuitFontSize   : CGFloat { return bounds.width * 0.0666 }
+    var cornerSuitOffset     : CGFloat { return bounds.width * 0.01 }
+    var cornerXOffset        : CGFloat { return bounds.width * 0.0556 }
+    var cornerYOffset        : CGFloat { return bounds.width * 0.0667 }
+    var squareMargin         : CGFloat { return bounds.width * 0.189 }
+    var squareStrokeWidth    : CGFloat { return bounds.width * 0.005 }
+    var underlineOffset      : CGFloat { return bounds.width * 0.0333 }
+    var underlineInset       : CGFloat { return bounds.width * 0.0111 }
+    var underlineStrokeWidth : CGFloat { return bounds.width * 0.0111 }
 
     // MARK: - Initialization
     
@@ -92,8 +102,11 @@ class RookCardView : UIView {
         let roundedRect = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius)
         
         roundedRect.addClip()
+        
+        _ = pushContext()
         UIColor.white.setFill()
         UIRectFill(bounds)
+        popContext()
     }
     
     private func drawFaceDown() {
@@ -157,15 +170,75 @@ class RookCardView : UIView {
         rankText.draw(in: textBounds)
         
         if rank == 6 || rank == 9 {
-            drawCenterUnderline()
+            drawCenterUnderline(using: textBounds, with: font)
         }
     }
     
-    private func drawCenterUnderline() {
+    private func drawCenterUnderline(using textBounds: CGRect, with font: UIFont) {
+        let underline = UIBezierPath()
+        let yOffset = textBounds.origin.y + textBounds.height + font.descender + underlineOffset
         
+        underline.move(to: CGPoint(x: textBounds.origin.x + underlineInset, y: yOffset))
+        underline.addLine(to: CGPoint(x: textBounds.origin.x + textBounds.width - 2 * underlineInset,
+                                      y: yOffset))
+        underline.lineWidth = underlineStrokeWidth
+        underline.stroke()
     }
 
     private func drawCornerText() {
+        guard let rankFont = UIFont(name: Card.fontName, size: cornerRankFontSize) else {
+            return
+        }
         
+        guard let suitFont = UIFont(name: Card.fontName, size: cornerSuitFontSize) else {
+            return
+        }
+
+        guard let color = Card.suitColors[suit] else {
+            return
+        }
+
+        let rankText = NSAttributedString(string: "\(rank)", attributes: [
+            .font : rankFont,
+            .foregroundColor : color
+            ])
+        let suitText = NSAttributedString(string: "\(suit.rawValue.uppercased())", attributes: [
+            .font : suitFont,
+            .foregroundColor : color
+            ])
+        let rankOrigin = CGPoint(x: cornerXOffset,
+                                 y: cornerYOffset - rankFont.lineHeight + rankFont.capHeight
+                                    - rankFont.descender)
+        let suitOrigin = CGPoint(x: cornerXOffset + rankText.size().width + cornerSuitOffset,
+                                 y: cornerYOffset)
+        
+        if suit == Suit.rook {
+            // NEEDSWORK
+        } else {
+            rankText.draw(at: rankOrigin)
+            suitText.draw(at: suitOrigin)
+            pushContextAndRotateUpsideDown()
+            rankText.draw(at: rankOrigin)
+            suitText.draw(at: suitOrigin)
+        }
+    }
+    
+    private func popContext() {
+        UIGraphicsGetCurrentContext()?.restoreGState()
+    }
+    
+    private func pushContext() -> CGContext? {
+        let context = UIGraphicsGetCurrentContext()
+        
+        context?.saveGState()
+        
+        return context
+    }
+    
+    private func pushContextAndRotateUpsideDown() {
+        let context = pushContext()
+        
+        context?.translateBy(x: bounds.width, y: bounds.height)
+        context?.rotate(by: CGFloat(Double.pi))
     }
 }
