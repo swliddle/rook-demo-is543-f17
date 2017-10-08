@@ -12,6 +12,7 @@
 		3F8AF9991F89A5F400A93E83 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F8AF9971F89A5F400A93E83 /* Main.storyboard */; };
 		3F8AF99B1F89A5F400A93E83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F8AF99A1F89A5F400A93E83 /* Assets.xcassets */; };
 		3F8AF99E1F89A5F400A93E83 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F8AF99C1F89A5F400A93E83 /* LaunchScreen.storyboard */; };
+		3F8AF9B41F89AA7900A93E83 /* RookCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8AF9B31F89AA7900A93E83 /* RookCardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		3F8AF99A1F89A5F400A93E83 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3F8AF99D1F89A5F400A93E83 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3F8AF99F1F89A5F400A93E83 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3F8AF9B31F89AA7900A93E83 /* RookCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RookCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +56,47 @@
 		3F8AF9921F89A5F400A93E83 /* Rook Card Demo */ = {
 			isa = PBXGroup;
 			children = (
-				3F8AF9931F89A5F400A93E83 /* AppDelegate.swift */,
-				3F8AF9951F89A5F400A93E83 /* ViewController.swift */,
-				3F8AF9971F89A5F400A93E83 /* Main.storyboard */,
+				3F8AF9B21F89AA6B00A93E83 /* Model */,
+				3F8AF9B11F89AA6100A93E83 /* View */,
+				3F8AF9B01F89AA5700A93E83 /* Controller */,
+				3F8AF9AF1F89AA4100A93E83 /* Supporting Files */,
 				3F8AF99A1F89A5F400A93E83 /* Assets.xcassets */,
+			);
+			path = "Rook Card Demo";
+			sourceTree = "<group>";
+		};
+		3F8AF9AF1F89AA4100A93E83 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3F8AF9931F89A5F400A93E83 /* AppDelegate.swift */,
 				3F8AF99C1F89A5F400A93E83 /* LaunchScreen.storyboard */,
 				3F8AF99F1F89A5F400A93E83 /* Info.plist */,
 			);
-			path = "Rook Card Demo";
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3F8AF9B01F89AA5700A93E83 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3F8AF9951F89A5F400A93E83 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		3F8AF9B11F89AA6100A93E83 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3F8AF9971F89A5F400A93E83 /* Main.storyboard */,
+				3F8AF9B31F89AA7900A93E83 /* RookCardView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3F8AF9B21F89AA6B00A93E83 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,6 +173,7 @@
 			files = (
 				3F8AF9961F89A5F400A93E83 /* ViewController.swift in Sources */,
 				3F8AF9941F89A5F400A93E83 /* AppDelegate.swift in Sources */,
+				3F8AF9B41F89AA7900A93E83 /* RookCardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
