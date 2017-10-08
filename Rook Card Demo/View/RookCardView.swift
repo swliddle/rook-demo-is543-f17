@@ -32,7 +32,9 @@ class RookCardView : UIView {
     
     private struct Card {
         static let backImageName = "RookBack"
+        static let cornerRookImageName = "RookSquareTurquoise"
         static let fontName = "Palatino-Bold"
+        static let rookImageName = "RookSquare"
         static let suitColors = [
             Suit.rook   : UIColor(r:  34, g: 193, b: 196),
             Suit.red    : UIColor(r: 237, g:  37, b:  50),
@@ -46,7 +48,7 @@ class RookCardView : UIView {
     
     @IBInspectable var isFaceUp: Bool = true
     @IBInspectable var rank: Int = 1
-    var suit = Suit.yellow
+    var suit = Suit.rook
     
     // MARK: - Computed properties
     
@@ -109,25 +111,18 @@ class RookCardView : UIView {
         popContext()
     }
     
-    private func drawFaceDown() {
-        let rookImage = UIImage(named: Card.backImageName)
-        
-        rookImage?.draw(in: bounds)
-    }
-    
-    private func drawFaceUp() {
-        if suit == Suit.rook {
-            drawCenterImage()
-        } else {
-            drawCenterText()
-            drawCenterSquare()
+    private func drawCenterImage() {
+        guard let rookImage = UIImage(named: Card.rookImageName) else {
+            return
         }
         
-        drawCornerText()
-    }
-    
-    private func drawCenterImage() {
+        let width = bounds.width - 2 * centerImageMargin
+        let rookImageRect = CGRect(x: centerImageMargin,
+                                   y: (bounds.height - width) / 2,
+                                   width: width,
+                                   height: width)
         
+        rookImage.draw(in: rookImageRect)
     }
     
     private func drawCenterSquare() {
@@ -213,14 +208,42 @@ class RookCardView : UIView {
                                  y: cornerYOffset)
         
         if suit == Suit.rook {
-            // NEEDSWORK
+            if let rookImage = UIImage(named: Card.cornerRookImageName) {
+                let rookRect = CGRect(x: cornerXOffset, y: cornerYOffset,
+                                      width: cornerImageWidth, height: cornerImageWidth)
+                
+                rookImage.draw(in: rookRect)
+                suitText.draw(at: suitOrigin)
+                pushContextAndRotateUpsideDown()
+                rookImage.draw(in: rookRect)
+                suitText.draw(at: suitOrigin)
+                popContext()
+            }
         } else {
             rankText.draw(at: rankOrigin)
             suitText.draw(at: suitOrigin)
             pushContextAndRotateUpsideDown()
             rankText.draw(at: rankOrigin)
             suitText.draw(at: suitOrigin)
+            popContext()
         }
+    }
+    
+    private func drawFaceDown() {
+        let rookImage = UIImage(named: Card.backImageName)
+        
+        rookImage?.draw(in: bounds)
+    }
+    
+    private func drawFaceUp() {
+        if suit == Suit.rook {
+            drawCenterImage()
+        } else {
+            drawCenterText()
+            drawCenterSquare()
+        }
+        
+        drawCornerText()
     }
     
     private func popContext() {
