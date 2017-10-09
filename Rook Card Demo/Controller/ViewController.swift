@@ -9,17 +9,20 @@
 import UIKit
 
 class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    
+    @IBOutlet weak var rookCard: RookCardView!
+    
+    @IBAction func swipe(_ sender: UISwipeGestureRecognizer) {
+        UIView.transition(
+            with: rookCard,
+            duration: 0.5,
+            options: sender.direction == .right ?
+                .transitionFlipFromLeft :
+                .transitionFlipFromRight,
+            animations: {
+                self.rookCard.isFaceUp = !self.rookCard.isFaceUp
+                self.rookCard.setNeedsDisplay()
+            },
+            completion: nil)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
 }
-
