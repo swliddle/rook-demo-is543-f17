@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  RookCardViewController.swift
 //  Rook Card Demo
 //
 //  Created by Steve Liddle on 10/7/17.
@@ -8,9 +8,13 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class RookCardViewController: UIViewController {
+    
+    // MARK: - Outlets
     
     @IBOutlet weak var rookCard: RookCardView!
+    
+    // MARK: - Actions
     
     @IBAction func swipe(_ sender: UISwipeGestureRecognizer) {
         UIView.transition(

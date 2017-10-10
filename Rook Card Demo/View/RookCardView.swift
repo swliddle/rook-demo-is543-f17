@@ -11,12 +11,6 @@ import UIKit
 @IBDesignable
 class RookCardView : UIView {
 
-    // MARK: - Nested types
-
-    enum Suit : String {
-        case rook, red, green, yellow, black
-    }
-
     // MARK: - Constants
 
     private struct Card {
@@ -24,7 +18,7 @@ class RookCardView : UIView {
         static let cornerRookImageName = "RookSquareTurquoise"
         static let fontName = "Palatino-Bold"
         static let rookImageName = "RookSquare"
-        static let suitColors: [Suit : UIColor] = [
+        static let suitColors: [RookCard.Suit : UIColor] = [
                                 .rook   : UIColor(r:  34, g: 193, b: 196),
                                 .red    : UIColor(r: 237, g:  37, b:  50),
                                 .green  : UIColor(r:  36, g: 193, b:  80),
@@ -36,9 +30,9 @@ class RookCardView : UIView {
 
     // MARK: - Properties
 
-    @IBInspectable var isFaceUp: Bool = true
-    @IBInspectable var rank: Int = 1
-    var suit = Suit.red
+    @IBInspectable var isFaceUp: Bool = false
+    @IBInspectable var rank: Int = RookCard.Rank.rook
+    var suit: RookCard.Suit = .rook
 
     // MARK: - Computed properties
 
@@ -184,7 +178,7 @@ class RookCardView : UIView {
         let rankOrigin = CGPoint(x: cornerXOffset, y: rankYOffset)
         let suitOrigin = CGPoint(x: suitXOffset, y: cornerYOffset)
 
-        if suit == Suit.rook {
+        if suit == RookCard.Suit.rook {
             if let rookImage = UIImage(named: Card.cornerRookImageName) {
                 let rookRect = CGRect(x: cornerXOffset, y: cornerYOffset,
                                       width: cornerImageWidth, height: cornerImageWidth)
@@ -207,13 +201,11 @@ class RookCardView : UIView {
     }
     
     private func drawFaceDown() {
-        let rookImage = UIImage(named: Card.backImageName)
-        
-        rookImage?.draw(in: bounds)
+        UIImage(named: Card.backImageName)?.draw(in: bounds)
     }
-    
+
     private func drawFaceUp() {
-        if suit == Suit.rook {
+        if suit == RookCard.Suit.rook {
             drawCenterImage()
         } else {
             drawCenterText()
