@@ -30,11 +30,40 @@ class RookCardView : UIView {
 
     // MARK: - Properties
 
-    @IBInspectable var isFaceUp: Bool = false
-    @IBInspectable var rank: Int = RookCard.Rank.rook
-    var suit: RookCard.Suit = .rook
+    var card = RookCard()
 
     // MARK: - Computed properties
+    
+    @IBInspectable var isFaceUp: Bool {
+        get {
+            return card.isFaceUp
+        }
+        set {
+            card.isFaceUp = newValue
+        }
+    }
+
+    @IBInspectable var rank: Int {
+        get {
+            return card.rank
+        }
+        set {
+            card.rank = newValue
+        }
+    }
+
+    @IBInspectable var suit: String {
+        get {
+            return card.suit.description
+        }
+        set {
+            if let newSuit = RookCard.Suit(rawValue: newValue) {
+                card.suit = newSuit
+            }
+        }
+    }
+
+    // See slides for explanations of the uses of these computed properties
 
     var centerFontSize       : CGFloat { return bounds.width * 0.55 }
     var centerImageMargin    : CGFloat { return bounds.width * 0.15 }
@@ -165,7 +194,7 @@ class RookCardView : UIView {
             .font : rankFont,
             .foregroundColor : suitColor()
             ])
-        let suitText = NSAttributedString(string: "\(suit.rawValue.uppercased())", attributes: [
+        let suitText = NSAttributedString(string: "\(suit)", attributes: [
             .font : suitFont,
             .foregroundColor : suitColor()
             ])
@@ -178,7 +207,7 @@ class RookCardView : UIView {
         let rankOrigin = CGPoint(x: cornerXOffset, y: rankYOffset)
         let suitOrigin = CGPoint(x: suitXOffset, y: cornerYOffset)
 
-        if suit == RookCard.Suit.rook {
+        if card.suit == RookCard.Suit.rook {
             if let rookImage = UIImage(named: Card.cornerRookImageName) {
                 let rookRect = CGRect(x: cornerXOffset, y: cornerYOffset,
                                       width: cornerImageWidth, height: cornerImageWidth)
@@ -205,7 +234,7 @@ class RookCardView : UIView {
     }
 
     private func drawFaceUp() {
-        if suit == RookCard.Suit.rook {
+        if card.suit == RookCard.Suit.rook {
             drawCenterImage()
         } else {
             drawCenterText()
@@ -243,7 +272,7 @@ class RookCardView : UIView {
     }
     
     private func suitColor() -> UIColor {
-        if let color = Card.suitColors[suit] {
+        if let color = Card.suitColors[card.suit] {
             return color
         }
 

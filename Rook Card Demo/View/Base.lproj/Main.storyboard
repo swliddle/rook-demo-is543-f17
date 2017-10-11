@@ -26,6 +26,13 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="500" constant="1000" id="7vb-3K-7ph"/>
                                     <constraint firstAttribute="width" secondItem="dOj-Wa-j7T" secondAttribute="height" multiplier="7:10" id="wPs-5q-UQC"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="rank">
+                                        <integer key="value" value="9"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="suit" value="green"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isFaceUp" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="Wwk-Ja-Thf" appends="YES" id="6th-iw-mR0"/>
                                     <outletCollection property="gestureRecognizers" destination="BP7-K9-ZRi" appends="YES" id="GHx-KD-4ds"/>

@@ -103,9 +103,7 @@ extension RookDeckViewController : UICollectionViewDataSource {
         let card = deck[indexPath.row]
         
         if let rookCardCell = cell as? RookCardCell {
-            rookCardCell.rookCardView.isFaceUp = card.isFaceUp
-            rookCardCell.rookCardView.rank = card.rank
-            rookCardCell.rookCardView.suit = card.suit
+            rookCardCell.rookCardView.card = card
             rookCardCell.rookCardView.setNeedsDisplay()
         }
         

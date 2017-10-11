@@ -20,6 +20,11 @@ class RookCard {
 
     enum Suit : String {
         case rook, red, green, yellow, black
+
+        var description: String {
+            return self.rawValue.uppercased()
+        }
+
         static let validSuits: [Suit] = [.rook, .red, .green, .yellow, .black]
     }
 
@@ -32,6 +37,7 @@ class RookCard {
     // MARK: - Initialization
 
     init() {
+        // By default this builds a Rook card
     }
 
     init(suit: Suit, rank: Int) {
