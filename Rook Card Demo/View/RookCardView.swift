@@ -93,6 +93,7 @@ class RookCardView : UIView {
     }
     
     override func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
         setup()
     }
     
