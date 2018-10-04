@@ -8,7 +8,7 @@
 
 import Foundation
 
-class RookDeck {
+struct RookDeck {
     private var cards: [RookCard] = []
 
     init() {
@@ -25,14 +25,19 @@ class RookDeck {
     }
 
     subscript(index: Int) -> RookCard {
-        return cards[index]
+        get {
+            return cards[index]
+        }
+        set {
+            cards[index] = newValue
+        }
     }
 
     var count: Int {
         return cards.count
     }
 
-    func shuffle() {
+    mutating func shuffle() {
         // Our strategy is to randomly pick a card from the deck, put it at the end of a new array,
         // and repeat until we've picked all the cards.  The new array is the shuffled deck.
         var newCards: [RookCard] = []

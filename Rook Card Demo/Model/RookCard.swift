@@ -8,7 +8,7 @@
 
 import Foundation
 
-class RookCard {
+struct RookCard {
     
     // MARK: - Nested types
     

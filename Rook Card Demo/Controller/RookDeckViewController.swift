@@ -73,7 +73,7 @@ class RookDeckViewController : UIViewController {
             duration: 0.5,
             options: .transitionFlipFromLeft,
             animations: {
-                rookCardCell.rookCardView.isFaceUp = !rookCardCell.rookCardView.isFaceUp
+                rookCardCell.rookCardView.isFaceUp.toggle()
                 rookCardCell.rookCardView.setNeedsDisplay()
             },
             completion: {
@@ -114,7 +114,7 @@ extension RookDeckViewController : UICollectionViewDataSource {
 extension RookDeckViewController : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let rookCardCell = collectionView.cellForItem(at: indexPath) as? RookCardCell {
-            deck[indexPath.row].isFaceUp = !deck[indexPath.row].isFaceUp
+            deck[indexPath.row].isFaceUp.toggle()
             flipCard(inCell: rookCardCell)
         }
     }
